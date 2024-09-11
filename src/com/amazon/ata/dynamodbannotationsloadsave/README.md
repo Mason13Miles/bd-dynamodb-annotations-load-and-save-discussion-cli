@@ -24,4 +24,6 @@ Phase 0 is complete when:
 
 ## Phases 1+
 
-Follow the instructions provided by the instructors in class.
+Follow the instructions provided by the instructors in class. 
+
+I have not made any changes to this file. Not sure i needed as this was used to connect to DynamoDB. Still struggling with connecting cli with db. 
