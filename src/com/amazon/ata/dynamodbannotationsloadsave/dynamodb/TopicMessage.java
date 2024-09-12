@@ -1,5 +1,9 @@
 package com.amazon.ata.dynamodbannotationsloadsave.dynamodb;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDB;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,10 +12,10 @@ import java.util.Objects;
 /**
  * A message on a particular topic in the Discussion app.
  */
+@DynamoDBTable(tableName = "DynamoDbAnnotationsLoadSave-TopicMessages")
 public class TopicMessage {
     private static final String TIMESTAMP_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS";
     private static final DateTimeFormatter TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern(TIMESTAMP_PATTERN);
-
     private String topicName;
     private String timestamp;
     private String author;
@@ -24,6 +28,7 @@ public class TopicMessage {
         timestamp = ZonedDateTime.now(ZoneId.of("UTC")).format(TIMESTAMP_FORMATTER);
     }
 
+    @DynamoDBHashKey(attributeName = "topicName")
     public String getTopicName() {
         return topicName;
     }
@@ -32,6 +37,7 @@ public class TopicMessage {
         this.topicName = topicName;
     }
 
+    @DynamoDB
     public String getTimestamp() {
         return timestamp;
     }

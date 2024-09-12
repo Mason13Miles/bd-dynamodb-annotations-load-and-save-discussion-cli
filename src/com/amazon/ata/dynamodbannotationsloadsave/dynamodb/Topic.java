@@ -1,11 +1,14 @@
 package com.amazon.ata.dynamodbannotationsloadsave.dynamodb;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
+
 import java.util.Objects;
 
 /**
  * A topic in the Discussion app, which may have many TopicMessages associated
  * with it.
  */
+@DynamoDBTable(tableName = "DynamoDbAnnotationsLoadSave-Topics")
 public class Topic {
     private static final int MAX_NAME_LENGTH = 50;
 
@@ -30,7 +33,7 @@ public class Topic {
         setDescription(description);
         setArchived(false);
     }
-
+    @DynamoDBHashKey(attributeName = "name")
     public String getName() {
         return name;
     }
@@ -47,7 +50,7 @@ public class Topic {
         }
         this.name = name;
     }
-
+    @DynamoDBAttribute(attributeName = "description")
     public String getDescription() {
         return description;
     }
@@ -55,7 +58,8 @@ public class Topic {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.BOOL)
+    @DynamoDBAttribute(attributeName = "isArchived")
     public Boolean isArchived() {
         return isArchived;
     }
