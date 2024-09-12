@@ -1,8 +1,6 @@
 package com.amazon.ata.dynamodbannotationsloadsave.dynamodb;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -37,7 +35,7 @@ public class TopicMessage {
         this.topicName = topicName;
     }
 
-    @DynamoDB
+    @DynamoDBRangeKey(attributeName = "timestamp")
     public String getTimestamp() {
         return timestamp;
     }
@@ -46,6 +44,7 @@ public class TopicMessage {
         this.timestamp = timestamp;
     }
 
+    @DynamoDBAttribute(attributeName = "author")
     public String getAuthor() {
         return author;
     }
@@ -54,6 +53,7 @@ public class TopicMessage {
         this.author = author;
     }
 
+    @DynamoDBAttribute(attributeName = "messageContent")
     public String getMessageContent() {
         return messageContent;
     }
